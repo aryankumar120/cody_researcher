@@ -1,0 +1,13 @@
+fastapi>=0.110,<1
+uvicorn[standard]>=0.29,<1
+groq>=0.9,<1
+httpx>=0.25,<1
+playwright>=1.40,<2
+trafilatura>=1.8,<3
+beautifulsoup4>=4.12,<5
+langgraph>=1.0,<2
+langgraph-checkpoint-sqlite>=2.0,<4
+pydantic>=2.7,<3
+python-dotenv>=1.0,<2
+tenacity>=8.0,<10
+tldextract>=5.0,<6
