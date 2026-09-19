@@ -31,7 +31,7 @@ python3 -m uvicorn backend.main:app --reload --port 8000
 - **Synthesize** — writes the final answer from the collected items, with `[E#]` citation markers.
 - **Validate** — plain code checks every citation marker matches real collected evidence before the answer is shown.
 
-## Tool choices, briefly
+## Tool choices
 
 - **Playwright** — For fallback, used when a plain HTTP fetch fails or looks broken (JS-heavy pages). Not used by default.
 
