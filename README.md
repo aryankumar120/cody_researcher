@@ -72,20 +72,6 @@ The idea: keep the expensive stuff (AI calls) small and fixed, even as the numbe
 - Relevance filtering and fact extraction are one LLM call per batch/page, no chunking for unusually large pages.
 - Search quality without a Tavily key depends on free DuckDuckGo scraping.
 
-## Known issues found during development
-
-- **413 crash on synthesis:** The first Siemens run collected 34 pages of evidence and the synthesis prompt exceeded Groq's 8,000 TPM limit (sent ~12K tokens). Fixed by capping the evidence payload to ~4,000 characters before sending to the LLM.
-
-- **86 API calls for a single run:** The `@retry` was retrying non-retryable errors like 413 (payload too large) 3 times, and `ask_json` added another retry layer on top — so one failed call cost up to 6 actual API calls. Fixed by adding a `retry_if_exception` filter that skips 400/413/422 errors.
-
-- **Playwright launching for 404 pages:** Every HTTP error (including genuine 404s) triggered a full Chromium launch. A 404 page won't magically have content in a browser. Changed to only use Playwright when HTTP succeeds but the body looks empty (JS-rendered apps).
-
-- **Guardrails too generous for free tier:** Default limits (40 pages, 15 iterations, 40 LLM calls) were fine for paid API tiers but caused the agent to accumulate too much evidence on the free tier before hitting synthesis. Lowered to 15 pages, 8 iterations, 20 LLM calls.
-
-- **No rate limiting between API calls:** Burst calls would hit the tokens-per-minute ceiling. Added a 2-second minimum interval between Groq calls.
-
-- **Page text too large for evidence extraction:** Sending 6,000 characters per page (~2K tokens) to the evidence extraction prompt was expensive. Halved to 3,000 characters — still enough for fact extraction but cuts per-page cost significantly.
-
 ## Project layout
 
 ```
