@@ -2,6 +2,12 @@
 
 An autonomous web research agent. Give it a company (name, domain, or URL) and a question. It finds the official site, reads the relevant pages, and answers with citations(proof behind the claim) back to the exact source page.
 
+Demo : 
+
+https://github.com/user-attachments/assets/ef894abc-f3b6-4df8-b29d-9244a4b15f2d
+
+
+
 ## Setup - bash 
 
 1. In the project root:
